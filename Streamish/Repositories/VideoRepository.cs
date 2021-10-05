@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Streamish.Models;
 using Streamish.Utils;
@@ -9,7 +10,12 @@ namespace Streamish.Repositories
 
     public class VideoRepository : BaseRepository, IVideoRepository
     {
+
+       
         public VideoRepository(IConfiguration configuration) : base(configuration) { }
+
+
+      
 
         public List<Video> GetAll()
         {

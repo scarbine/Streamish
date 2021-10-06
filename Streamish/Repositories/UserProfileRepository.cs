@@ -65,24 +65,26 @@ namespace Streamish.Repositories
                     var reader = cmd.ExecuteReader();
 
                     UserProfile userProfile = null;
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        userProfile = new UserProfile()
+                        if (userProfile == null)
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            Email = DbUtils.GetString(reader, "Email"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                            Videos = new List<Video>()
-                        };
-                     
-                    }
+                            userProfile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
+                                Videos = new List<Video>()
+                            };
+
+                        }
 
 
-                     if (DbUtils.IsNotDbNull(reader, "VideoId"))
+                        if (DbUtils.IsNotDbNull(reader, "VideoId"))
                         {
-                            userProfile.Videos.Add( new Video()
+                            userProfile.Videos.Add(new Video()
                             {
                                 Id = DbUtils.GetInt(reader, "VideoId"),
                                 Title = DbUtils.GetString(reader, "Title"),
@@ -92,9 +94,9 @@ namespace Streamish.Repositories
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
 
                             });
-                            
-                        }
 
+                        }
+                    }                
                     reader.Close();
 
                     return userProfile;

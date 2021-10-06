@@ -7,10 +7,12 @@ const VideoList = () => {
 
   const getVideos = () => {
     getAllVideos().then(videos => setVideos(videos));
+   
   };
 
   useEffect(() => {
-    getVideos();
+    getVideos()
+  
   }, []);
 
   return (
@@ -19,6 +21,7 @@ const VideoList = () => {
         {videos.map((video) => (
           <Video video={video} key={video.id} />
         ))}
+        {console.log(videos)}
       </div>
     </div>
   );

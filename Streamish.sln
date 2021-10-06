@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamish", "Streamish\Streamish.csproj", "{6D263D6E-D247-4FCB-8FB9-F767080B5AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamish.Test", "Streamish.Test\Streamish.Test.csproj", "{FF09FF09-7AEE-4257-84B0-922E531C6C9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamish.Test", "Streamish.Test\Streamish.Test.csproj", "{FF09FF09-7AEE-4257-84B0-922E531C6C9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

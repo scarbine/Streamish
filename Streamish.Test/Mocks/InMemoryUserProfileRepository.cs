@@ -69,12 +69,6 @@ namespace Streamish.Test.Mocks
             
         }
 
-        //    void Add(UserProfile userProfile);
-        //    void Delete(int id);
-        //    List<UserProfile> GetAll();
-        //    void Update(UserProfile userProfile);
-        //    UserProfile GetById(int id);
-
 
     }
 }

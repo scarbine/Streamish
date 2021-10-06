@@ -88,7 +88,7 @@ namespace Streamish.Test
         }
 
         [Fact]
-        public void Put_Method_Updates_A_Video()
+        public void Put_Method_Updates_A_User_Profile()
         {
            
             var testProfileId = 99;
@@ -100,6 +100,7 @@ namespace Streamish.Test
 
             var profileToUpdate = new UserProfile()
             {
+                Id = testProfileId,
                 Name = $"Name",
                 Email = $"user@example.com",
                 DateCreated = DateTime.Today,

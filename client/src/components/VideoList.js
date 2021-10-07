@@ -9,7 +9,7 @@ import { VideoForm } from "./VideoForm";
 
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
-//   const [refresh, setRefresh] = useState(false);
+  //   const [refresh, setRefresh] = useState(false);
 
   const getVideos = () => {
     getAllVideosWithComments().then((videos) => setVideos(videos));
@@ -48,7 +48,7 @@ const VideoList = () => {
       <div>
         <div>Add Video</div>
         <p>
-          <VideoForm />
+          <VideoForm getVideos={getVideos} />
         </p>
       </div>
       <div className="container">

@@ -19,6 +19,8 @@ export const VideoForm = ({getVideos}) => {
 
   return (
     <>
+    <div className="card">
+        <h3>AddVideo </h3>
       <Form>
         <FormGroup>
           <Label for="title">Title</Label>
@@ -52,6 +54,7 @@ export const VideoForm = ({getVideos}) => {
         </FormGroup>
         <Button onClick={handleAddVideo}>Submit</Button>
       </Form>
+      </div>
     </>
   );
 };

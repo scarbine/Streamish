@@ -10,13 +10,13 @@ export const VideoForm = () => {
     
 const handleAddVideo = () => {
 
-//   console.log(videoTitle.current.value, videoUrl.current.value, videoDescription.current.value);
+
     const newVideoObj = {
         Title : videoTitle.current.value,
         Url : videoUrl.current.value,
         Description : videoDescription.current.value
     }
-    console.log(newVideoObj)
+ 
     addVideo(newVideoObj)
 
 

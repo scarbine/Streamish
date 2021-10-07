@@ -1,60 +1,63 @@
-import React, { useRef } from "react";
-import { Button, Form, FormGroup, Label} from "reactstrap";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { addVideo } from "../modules/videoManager";
 
-export const VideoForm = ({getVideos}) => {
-  const videoTitle = useRef();
-  const videoUrl = useRef();
-  const videoDescription = useRef();
+export const VideoForm = ({ getVideos }) => {
+  const emptyVideo = {
+    title: '',
+    description: '',
+    url: ''
+  };
 
-  const handleAddVideo = () => {
-    const newVideoObj = {
-      Title: videoTitle.current.value,
-      Url: videoUrl.current.value,
-      Description: videoDescription.current.value,
-    };
+  const history = useHistory();
 
-    addVideo(newVideoObj).then(getVideos);
+  const [video, setVideo] = useState(emptyVideo);
+
+  const handleInputChange = (evt) => {
+    const value = evt.target.value;
+    const key = evt.target.id;
+
+    const videoCopy = { ...video };
+
+    videoCopy[key] = value;
+    setVideo(videoCopy);
+  };
+
+  const handleSave = (evt) => {
+    evt.preventDefault();
+
+    addVideo(video).then((p) => {
+        // Navigate the user back to the home route
+        history.push("/");
+    });
+    
+    
   };
 
   return (
-    <>
-    <div className="card">
-        <h3>AddVideo </h3>
-      <Form>
-        <FormGroup>
-          <Label for="title">Title</Label>
-          <input
-            type="title"
-            name="title"
-            id="title"
-            placeholder="video title"
-            ref={videoTitle}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="url">Url</Label>
-          <input
-            type="url"
-            name="url"
-            id="url"
-            placeholder="youtube url"
-            ref={videoUrl}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="description">Description</Label>
-          <input
-            type="description"
-            name="description"
-            id="description"
-            placeholder="what's this about?"
-            ref={videoDescription}
-          />
-        </FormGroup>
-        <Button onClick={handleAddVideo}>Submit</Button>
-      </Form>
-      </div>
-    </>
+    <Form>
+      <FormGroup>
+        <Label for="title">Title</Label>
+        <Input type="text" name="title" id="title" placeholder="video title"
+          value={video.title}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="url">URL</Label>
+        <Input type="text" name="url" id="url" placeholder="video link" 
+          value={video.url}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="description">Description</Label>
+        <Input type="textarea" name="description" id="description"
+          value={video.description}
+          onChange={handleInputChange} />
+      </FormGroup>
+      <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+    </Form>
   );
 };
+
+export default VideoForm;

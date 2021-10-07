@@ -3,15 +3,17 @@ import { Card, CardBody } from "reactstrap";
 
 const Video = ({ video }) => {
   return (
-    <Card >
+    <Card>
       <p className="text-left px-2">Posted by: {video.userProfile?.name}</p>
       <CardBody>
-        <iframe className="video"
+        <iframe
+          className="video"
           src={video.url}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen />
+          allowFullScreen
+        />
 
         <p>
           <strong>{video.title}</strong>
@@ -19,11 +21,15 @@ const Video = ({ video }) => {
         <p>{video.description}</p>
 
         <p>
-            <strong>Comments</strong>
-            </p>
-            <p>
-           {video.comments?.length !== 0 ? video.comments?.map((c) =>  c.message) : <div> No Comments </div>} 
-            </p>
+          <strong>Comments</strong>
+        </p>
+        <p>
+          {video.comments?.length !== 0 ? (
+            video.comments?.map((c) => c.message)
+          ) : (
+            <div> No Comments </div>
+          )}
+        </p>
       </CardBody>
     </Card>
   );

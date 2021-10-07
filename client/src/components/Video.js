@@ -23,13 +23,13 @@ const Video = ({ video }) => {
         <p>
           <strong>Comments</strong>
         </p>
-        <p>
+        
           {video.comments?.length !== 0 ? (
-            video.comments?.map((c) => c.message)
+            video.comments?.map((c) => <p>{c.message}</p>)
           ) : (
             <div> No Comments </div>
           )}
-        </p>
+        
       </CardBody>
     </Card>
   );

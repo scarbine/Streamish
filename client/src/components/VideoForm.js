@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label} from "reactstrap";
 import { addVideo } from "../modules/videoManager";
 
 export const VideoForm = ({getVideos}) => {

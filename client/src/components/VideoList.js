@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Video from "./Video";
 import {
-  getAllVideos,
   getAllVideosWithComments,
   searchVideos,
 } from "../modules/videoManager";
@@ -9,7 +8,7 @@ import { VideoForm } from "./VideoForm";
 
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
-  //   const [refresh, setRefresh] = useState(false);
+ 
 
   const getVideos = () => {
     getAllVideosWithComments().then((videos) => setVideos(videos));
@@ -41,15 +40,11 @@ const VideoList = () => {
     <>
       <div>
         <div>Seach Videos</div>
-        <p>
-          <VideoSearch />
-        </p>
+        <VideoSearch />
       </div>
       <div>
         <div>Add Video</div>
-        <p>
-          <VideoForm getVideos={getVideos} />
-        </p>
+        <VideoForm getVideos={getVideos} />
       </div>
       <div className="container">
         <div className="row justify-content-center">

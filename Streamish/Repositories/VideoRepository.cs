@@ -26,9 +26,9 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT Id, Title, Description, Url, DateCreated, UserProfileId
-                            FROM Video
-                        ORDER BY DateCreated
+                          SELECT v.Id, v.Title, v.Description, v.Url, v.DateCreated, v.UserProfileId, up.Id AS UserProfileId, up.Name, up.Email, up.ImageUrl,up.DateCreated AS UserProfileDateCreated
+                            FROM Video v JOIN UserProfile up ON v.UserProfileId = up.Id
+                            ORDER BY DateCreated
                     ";
 
                     var reader = cmd.ExecuteReader();
@@ -44,6 +44,14 @@ namespace Streamish.Repositories
                             DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
                             Url = DbUtils.GetString(reader, "Url"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated")
+                            }
                         });
                     }
 
@@ -137,7 +145,7 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT v.Title, v.Description, v.Url, v.DateCreated, v.UserProfileId, c.Id AS CommentId, c.Message, c.VideoId, c.UserProfileId AS CommentUserProfileId, up.Name, up.Email, up.ImageUrl, up.DateCreated
+                        SELECT v.Title, v.Description, v.Url, v.DateCreated, v.UserProfileId, c.Id AS CommentId, c.Message, c.VideoId, c.UserProfileId AS CommentUserProfileId, up.Id as UserProfileId up.Name, up.Email, up.ImageUrl, up.DateCreated as ProfileCrerateDate
                         FROM Video v LEFT JOIN Comment c ON c.VideoId =v.Id JOIN UserProfile up ON up.Id = c.UserProfileId
                         WHERE v.Id = @id";
 
@@ -157,6 +165,15 @@ namespace Streamish.Repositories
                                 Url = DbUtils.GetString(reader, "Url"),
                                 DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
                                 UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                    Name = DbUtils.GetString(reader, "Name"),
+                                    Email = DbUtils.GetString(reader, "Email"),
+                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                                    DateCreated = DbUtils.GetDateTime(reader, "ProfileCreateDate")
+
+                                },
                                 Comments = new List<Comment>(),
 
 

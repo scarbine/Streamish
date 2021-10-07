@@ -5,6 +5,20 @@ export const getAllVideos = () => {
     .then((res) => res.json())
 };
 
+export const videoWithCommentsEndpoint = baseUrl + "/GetWithComments"
+
+export const searchVideosEndpoint = baseUrl + "/search"
+
+export const getAllVideosWithComments = () => {
+    return fetch(videoWithCommentsEndpoint)
+    .then((res) => res.json())
+};
+
+export const searchVideos = (searchText) => {
+    return fetch(searchVideosEndpoint + "/?q=" + searchText + "&sortDesc=true")
+    .then((res) => res.json())
+};
+
 export const addVideo = (video) => {
   return fetch(baseUrl, {
     method: "POST",

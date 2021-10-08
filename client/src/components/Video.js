@@ -2,10 +2,10 @@ import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Video = ({ video }) => {
+export const Video = ({ video }) => {
   return (
     <Card>
-      <p className="text-left px-2">Posted by: {video.userProfile?.name}</p>
+      <p className="text-left px-2">Posted by:<Link to={`/users/${video.userProfile?.id}`}> {video.userProfile?.name} </Link></p>
       <CardBody>
         <iframe
           className="video"

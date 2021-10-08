@@ -18,6 +18,14 @@ export const searchVideos = (searchText) => {
   ).then((res) => res.json());
 };
 
+export const getVideo = (id) => {
+    return fetch(`${baseUrl}/GetVideoByIdWithComments?id=${id}`).then((res) => res.json());
+};
+
+export const getUserVideos = (id) => {
+  return fetch(`/api/UserProfile/${id}`).then((res) => res.json())
+}
+
 export const addVideo = (video) => {
   return fetch(baseUrl, {
     method: "POST",

@@ -6,7 +6,7 @@ import {
 } from "../modules/videoManager";
 import { VideoForm } from "./VideoForm";
 
-const VideoList = () => {
+export const VideoList = () => {
   const [videos, setVideos] = useState([]);
  
 
@@ -30,6 +30,7 @@ const VideoList = () => {
 
     return (
       <>
+        <h3>Seach Videos</h3>
         <input ref={textInput} type="text"></input>
         <button onClick={handleSearch}>Search Videos</button>
       </>
@@ -39,12 +40,10 @@ const VideoList = () => {
   return (
     <>
       <div>
-        <div>Seach Videos</div>
         <VideoSearch />
       </div>
       <div>
-        <div>Add Video</div>
-        <VideoForm getVideos={getVideos} />
+        {/* <VideoForm getVideos={getVideos} /> */}
       </div>
       <div className="container">
         <div className="row justify-content-center">

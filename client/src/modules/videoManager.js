@@ -24,29 +24,93 @@ export const videoWithCommentsEndpoint = baseUrl + "/GetWithComments";
 export const searchVideosEndpoint = baseUrl + "/search";
 
 export const getAllVideosWithComments = () => {
-  return fetch(videoWithCommentsEndpoint).then((res) => res.json());
+  return getToken().then((token) => {
+    return fetch(videoWithCommentsEndpoint, {
+      method: "Get",
+      headers :{
+        Authorization : `Bearer ${token}`
+      }
+    }).then((res) => {
+      if (res.ok){
+        return res.json();
+      } else{ 
+        throw new Error("An unkown error ocured while trying to get quotes.");
+      }
+    })
+  })
 };
+
 
 export const searchVideos = (searchText) => {
-  return fetch(
-    searchVideosEndpoint + "/?q=" + searchText + "&sortDesc=true"
-  ).then((res) => res.json());
+  return getToken().then((token) => {
+    return fetch(searchVideosEndpoint + "/?q=" + searchText + "&sortDesc=true", {
+      method: "Get",
+      headers :{
+        Authorization : `Bearer ${token}`
+      }
+    }).then((res) => {
+      if (res.ok){
+        return res.json();
+      } else{ 
+        throw new Error("An unkown error ocured while trying to get quotes.");
+      }
+    })
+  })
 };
+
 
 export const getVideo = (id) => {
-    return fetch(`${baseUrl}/GetVideoByIdWithComments?id=${id}`).then((res) => res.json());
+  return getToken().then((token) => {
+    return fetch(`${baseUrl}/GetVideoByIdWithComments?id=${id}`, {
+      method: "Get",
+      headers :{
+        Authorization : `Bearer ${token}`
+      }
+    }).then((res) => {
+      if (res.ok){
+        return res.json();
+      } else{ 
+        throw new Error("An unkown error ocured while trying to get quotes.");
+      }
+    })
+  })
 };
 
+
 export const getUserVideos = (id) => {
-  return fetch(`/api/UserProfile/${id}`).then((res) => res.json())
+  return getToken().then((token) => {
+    return fetch(`/api/UserProfile/${id}`, {
+      method: "Get",
+      headers :{
+        Authorization : `Bearer ${token}`
+      }
+    }).then((res) => {
+      if (res.ok){
+        return res.json();
+      } else{ 
+        throw new Error("An unkown error ocured while trying to get quotes.");
+      }
+    })
+  })
 }
 
 export const addVideo = (video) => {
-  return fetch(baseUrl, {
+  return getToken().then((token) => {
+    return fetch(baseUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(video),
+  }).then(res => {
+    if (res.ok) {
+      return res.json();
+    } else if (res.status === 401) {
+      throw new Error("Unautherized");
+    } else {
+      throw new Error("An unkown error ocured while trying to get quotes.");
+    }
+    })
   });
 };

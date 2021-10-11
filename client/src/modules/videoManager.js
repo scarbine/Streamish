@@ -1,7 +1,22 @@
+import { getToken } from "./authManager";
+
 const baseUrl = "/api/video";
 
 export const getAllVideos = () => {
-  return fetch(baseUrl).then((res) => res.json());
+  return getToken().then((token) => {
+  return fetch(baseUrl, {
+    method: "Get",
+    headers :{
+      Authorization : `Bearer ${token}`
+    }
+  }).then((res) => {
+    if (res.ok){
+      return res.json();
+    } else{ 
+      throw new Error("An unkown error ocured while trying to get quotes.");
+    }
+  })
+})
 };
 
 export const videoWithCommentsEndpoint = baseUrl + "/GetWithComments";
